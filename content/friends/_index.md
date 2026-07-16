@@ -1,4 +1,4 @@
 ---
-title: Blogs
+title: Friends
 view: article-grid
 ---

@@ -1,15 +1,17 @@
 ---
-title: Pandas
-date: 2023-10-26
+title: Project Template
+date: 2026-07-16
 links:
   - type: site
-    url: https://github.com/pandas-dev/pandas
+    url: https://github.com/example/project
 tags:
-  - Hugo
-  - HugoBlox
-  - Markdown
+  - Project
 ---
 
-Flexible and powerful data analysis / manipulation library for Python, providing labeled data structures.
+Briefly describe the project goal, your role, and the most important result.
 
 <!--more-->
+
+## Overview
+
+Use this page as the template for future projects. Add implementation details, links, screenshots, and outcomes here.
