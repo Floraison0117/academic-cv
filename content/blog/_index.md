@@ -1,4 +1,4 @@
 ---
-title: Blogs
+title: ''
 view: article-grid
 ---

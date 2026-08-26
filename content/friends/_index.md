@@ -1,4 +1,4 @@
 ---
-title: Friends
+title: ''
 view: article-grid
 ---

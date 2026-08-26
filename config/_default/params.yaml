@@ -9,11 +9,17 @@ hugoblox:
     mode: system
     pack: default
     colors:
-      primary: "#8B2F2F"
+      primary: "#C98F65"
       secondary: "#6B7F5E"
       neutral: "#1F2F3F"
   typography:
-    font: sans
+    # Use local system stacks so no Google Fonts are loaded;
+    # the actual families (LessWrong serif + KaiTi) are set in assets/css/custom.css.
+    families:
+      heading: "system-serif"
+      body: "system-serif"
+      code: "system-mono"
+      nav: "system-serif"
     size: md
   layout:
     radius: md

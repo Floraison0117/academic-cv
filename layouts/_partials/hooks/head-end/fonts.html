@@ -1,0 +1,22 @@
+{{/* Font overrides — injected at head-end so they win the CSS cascade.
+     English/Latin: LessWrong content serif stack (source: ForumMagnum
+     themes/defaultPalette.ts serifStack):
+       'Warnock Pro' → Palatino → 'Palatino Linotype' → 'Book Antiqua' → Georgia
+     Chinese: 楷体 (KaiTi) — KaiTi/SimKai (Windows), STKaiti/Kaiti SC (macOS),
+     AR PL UKai CN / UKai (Linux).
+     Latin fonts are listed first so Latin glyphs use the LessWrong serif
+     and CJK glyphs fall through to KaiTi. */}}
+<style>
+  :root {
+    --hb-lw-serif: 'Warnock Pro', Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif;
+    --hb-kaiti: 'KaiTi', '楷体', 'STKaiti', 'Kaiti SC', '楷体_GB2312', 'AR PL UKai CN', 'UKai', serif;
+
+    --hb-font-body: var(--hb-lw-serif), var(--hb-kaiti);
+    --hb-font-heading: 'ETBookRoman', var(--hb-lw-serif), var(--hb-kaiti);
+    --hb-font-nav: 'ETBookRoman', var(--hb-lw-serif), var(--hb-kaiti);
+    /* LessWrong code stack: Liberation Mono → Menlo → Courier */
+    --hb-font-code: 'Liberation Mono', Menlo, Courier, monospace;
+    /* Tailwind font-sans / font-body utilities */
+    --hb-font-family-sans: var(--hb-lw-serif), var(--hb-kaiti);
+  }
+</style>

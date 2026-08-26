@@ -2,14 +2,21 @@ schema: "hugoblox/author/v1"
 slug: "me"
 is_owner: true
 name:
-  display: "Floraison"
-  given: "Floraison"
+  display: "Cao Xuan"
+  given: "Cao Xuan"
   family: ""
   alternate: ""
   pronunciation: ""
   pronouns: ""
-role: "College of Control Science and Engineering"
-bio: "A short personal summary goes here. Use this paragraph to describe your research interests, background, and current focus in a few concise sentences.\n"
+role: "Undergraduate"
+bio: |
+  Hi, I'm Cao Xuan, an undergraduate student studying Control Science and Engineering at Zhejiang University.
+
+  My main interest is efficient AI systems. I want to build algorithms that are not only effective in theory, but also hardware-aware, computationally efficient, and grounded in solid mathematical principles.
+
+  I am especially interested in the interaction between machine learning, optimization, probability, information theory, numerical computation, and modern hardware. Rather than treating algorithms and systems as separate layers, I hope to understand how hardware constraints can shape algorithm design, and how mathematical structure can lead to more efficient implementations.
+
+  Ultimately, I want to develop practical algorithms that combine theoretical insight with systems efficiency to solve meaningful problems in the real world.
 affiliations:
   - name: "Zhejiang University"
     url: "https://www.zju.edu.cn/english/"
@@ -18,13 +25,13 @@ links:
     url: "https://github.com/Floraison0117"
   - icon: "academicons/google-scholar"
     url: "https://scholar.google.com/citations?user=example"
+  - icon: "custom/cc98"
+    url: "https://www.cc98.org/user/id/763525"
+    label: "CC98"
 interests:
-  - "VLA Efficiency"
   - "Data Science"
-  - "Parallel Programming"
+  - "VLA Efficiency"
+  - "HPC"
 education:
-  - degree: "BEng Computer Science and Engineering"
-    institution: "Zhejiang University"
-    start: "2024-09-01"
-    end: ""
-    summary: "Briefly describe coursework, research training, or academic focus here.\n"
+  - degree: "24-25 National Scholarship, First-Class Scholarship"
+    institution: "Control Science and Engineering, Zhejiang University"

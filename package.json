@@ -5,8 +5,8 @@
   "packageManager": "pnpm@10.14.0",
   "description": "Academic CV starter template for Hugo Blox with Tailwind CSS v4",
   "scripts": {
-    "dev": "hugo server --disableFastRender",
-    "build": "hugo --minify && pnpm run pagefind",
+    "dev": "set \"GIT_CONFIG_COUNT=1\" && set \"GIT_CONFIG_KEY_0=http.sslBackend\" && set \"GIT_CONFIG_VALUE_0=openssl\" && set \"PATH=%CD%\\.tools\\go\\go\\bin;%PATH%\" && .\\.tools\\hugo\\hugo.exe server --disableFastRender",
+    "build": "set \"GIT_CONFIG_COUNT=1\" && set \"GIT_CONFIG_KEY_0=http.sslBackend\" && set \"GIT_CONFIG_VALUE_0=openssl\" && set \"PATH=%CD%\\.tools\\go\\go\\bin;%PATH%\" && .\\.tools\\hugo\\hugo.exe --minify && pnpm run pagefind",
     "pagefind": "pagefind --site public"
   },
   "dependencies": {

@@ -1,24 +1,24 @@
 :root {
-  --hb-trad-red: #8B2F2F;
+  --hb-trad-red: #C98F65;
   --hb-trad-green: #6B7F5E;
   --hb-trad-gold: #D4AF37;
   --hb-trad-blue: #CDE0E6;
   --hb-trad-mauve: #BFA7B5;
   --hb-trad-ink: #1F2F3F;
 
-  --hb-color-background: var(--hb-trad-blue);
+  --hb-color-background: #F9E7D1;
   --hb-color-foreground: var(--hb-trad-ink);
-  --hb-color-header-bg: var(--hb-trad-ink);
-  --hb-color-header-fg: var(--hb-trad-blue);
+  --hb-color-header-bg: #38455D;
+  --hb-color-header-fg: #F9E7D1;
   --hb-color-footer-bg: var(--hb-trad-ink);
   --hb-color-footer-fg: var(--hb-trad-blue);
 }
 
 .dark {
-  --hb-color-background: var(--hb-trad-ink);
+  --hb-color-background: #38455D;
   --hb-color-foreground: var(--hb-trad-blue);
-  --hb-color-header-bg: var(--hb-trad-ink);
-  --hb-color-header-fg: var(--hb-trad-gold);
+  --hb-color-header-bg: #38455D;
+  --hb-color-header-fg: #F9E7D1;
   --hb-color-footer-bg: var(--hb-trad-ink);
   --hb-color-footer-fg: var(--hb-trad-mauve);
 }
@@ -41,7 +41,7 @@ a {
 .hb-section,
 .page-body {
   background:
-    radial-gradient(circle at 12% 6%, color-mix(in srgb, var(--hb-trad-mauve) 32%, transparent), transparent 28rem),
+    radial-gradient(circle at 12% 6%, color-mix(in srgb, #7C8FA3 32%, transparent), transparent 28rem),
     radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--hb-trad-gold) 20%, transparent), transparent 24rem);
 }
 
@@ -59,7 +59,7 @@ a {
 .dark .prose mark,
 .dark .article-metadata .badge,
 .dark .tag {
-  background-color: color-mix(in srgb, var(--hb-trad-gold) 28%, var(--hb-trad-ink));
+  background-color: color-mix(in srgb, var(--hb-trad-gold) 22%, white);
   color: var(--hb-trad-blue);
 }
 
@@ -73,4 +73,262 @@ a:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--hb-trad-gold);
   outline-offset: 3px;
+}
+
+/* Give the biography more room on wide screens and preserve paragraph breaks. */
+.resume-biography > .max-w-7xl {
+  width: min(100%, 100rem);
+  max-width: 100rem;
+  margin-inline: auto;
+}
+
+.resume-biography .bio-text {
+  max-width: none;
+  width: 100%;
+  white-space: pre-line;
+}
+
+@media (min-width: 768px) {
+  .resume-biography .md\:col-span-8 > .mb-12:first-child > .prose {
+    width: auto;
+    max-width: none;
+    margin-right: 10em;
+  }
+}
+
+.resume-biography .bio-text p {
+  margin: 0;
+}
+
+.resume-biography .bio-text p + p {
+  margin-top: 0em;
+}
+
+/* Keep the biography text closer to its Summary and Education headings. */
+.resume-biography .md\:col-span-8 > .mb-12:first-child {
+  margin-bottom: 1.5rem;
+}
+
+.resume-biography .md\:col-span-8 > .mb-12:first-child > .flex.items-center.gap-4.mb-8 {
+  margin-bottom: 1rem;
+}
+
+/* Stack education entries vertically and let each card fill the content width. */
+.resume-biography .md\:col-span-8 > .mb-16 > .grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.resume-biography .md\:col-span-8 > .mb-16 > .grid > .group {
+  width: 100%;
+}
+
+/* Replace the education icon with the Zhejiang University logo. */
+.resume-biography .md\:col-span-8 > .mb-16 > .grid > .group > .flex > .flex-shrink-0.w-12.h-12 {
+  background-image: url("https://www.eduopinions.com/wp-content/uploads/2020/06/Zhejiang-University-logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 78%;
+}
+
+.resume-biography .md\:col-span-8 > .mb-16 > .grid > .group > .flex > .flex-shrink-0.w-12.h-12 > svg {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .resume-biography .md\:col-span-8 > .mb-16 {
+    margin-right: 10em;
+  }
+
+  .resume-biography .md\:col-span-8 > .mb-16 > .grid > .group .flex-1.flex-grow {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resume-biography .md\:col-span-8 > .mb-16 > .grid > .group .flex-1.flex-grow > p.text-gray-700 {
+    order: -1;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .resume-biography .md\:col-span-8 > .mb-16 > .grid > .group .flex-1.flex-grow > p.text-xl {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-gray-500);
+  }
+
+  .resume-biography .md\:col-span-8 > .mb-16 > .grid > .group .flex-1.flex-grow > p.text-gray-700 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+  }
+
+  .dark .resume-biography .md\:col-span-8 > .mb-16 > .grid > .group .flex-1.flex-grow > p.text-xl {
+    color: var(--color-gray-400);
+  }
+
+.dark .resume-biography .md\:col-span-8 > .mb-16 > .grid > .group .flex-1.flex-grow > p.text-gray-700 {
+    color: var(--color-white);
+  }
+}
+
+/* Match the Interests heading size to the Education heading. */
+.resume-biography .md\:col-span-8 > div:last-child > .flex.items-center.gap-4.mb-8 > h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .resume-biography .md\:col-span-8 > div:last-child > .flex.items-center.gap-4.mb-8 > h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .resume-biography .md\:col-span-8 > div:last-child > .flex.items-center.gap-4.mb-8 > h3 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
+/* Shared biography accents and light-mode navigation color. */
+#section-resume-biography-3 > .absolute.inset-0.-z-10 > div:nth-child(2) {
+  background-color: rgb(201 143 101 / 20%) !important;
+}
+
+#section-resume-biography-3 > .absolute.inset-0.-z-10 > div:nth-child(3) {
+  background-color: rgb(168 184 154 / 16%) !important;
+}
+
+html:not(.dark) .navbar-brand {
+  color: #F9E7D1;
+}
+
+html:not(.dark) .navbar-nav .active {
+  color: #C98F65;
+}
+
+.dark .navbar-brand {
+  color: #F9E7D1;
+}
+
+.dark .navbar-nav .active {
+  color: #C98F65;
+}
+
+/* Match the dark-mode biography heading icon backgrounds to the education palette. */
+.dark .resume-biography [class*="dark:bg-primary-900/50"] {
+  background-color: #1F2937 !important;
+}
+
+.dark .resume-biography span[class*="dark:border-primary-800/50"]:not(:hover) {
+  border-color: transparent !important;
+}
+
+/* Remove social sharing buttons from blog and project detail pages. */
+.page-body #share-link-x,
+.page-body #share-link-facebook,
+.page-body #share-link-email,
+.page-body #share-link-linkedin,
+.page-body #share-link-whatsapp {
+  display: none !important;
+}
+
+/* Remove the Hugo Blox "Build your site" footer CTA. */
+.page-footer [data-hbx="poweredby_cta"] {
+  display: none !important;
+}
+
+/* Make the Stanford CS234 article smaller and wider to match the reference layout. */
+body:has(.article-cover img[src*="/blog/stanford-cs234/"]) .prose[data-pagefind-body] {
+  max-width: calc(65ch + 20em);
+  font-size: 0.95rem !important;
+  line-height: 1.7;
+}
+
+/* Reuse the same full-width horizontal card layout for blogs and projects. */
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body > .flex.flex-col.items-center > div.container {
+  width: 100%;
+  max-width: none;
+  padding-inline: 2rem;
+}
+
+/* The collection block may place the card container inside a section. */
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body .container:has([role="article"]) {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body .container:has([role="article"]) > .grid {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body > .flex.flex-col.items-center > div.container > .grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
+  display: grid;
+  grid-template-columns: minmax(16rem, 32%) minmax(0, 1fr);
+  align-items: stretch;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child {
+  min-height: 18rem;
+  aspect-ratio: auto;
+}
+
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Shared card reveal animation for Blogs and Projects. */
+@media (min-width: 768px) {
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
+    transition: grid-template-columns 650ms cubic-bezier(.22, 1, .36, 1), box-shadow 300ms ease, transform 300ms ease;
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child {
+    position: relative;
+    overflow: hidden;
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img {
+    object-fit: cover !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none;
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after {
+    display: none;
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
+    position: relative;
+    z-index: 3;
+    transform: translateX(0);
+    transition: transform 650ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover {
+    grid-template-columns: minmax(24rem, 40%) minmax(0, 1fr);
+    transform: scale(1.01) translateY(-0.5rem);
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover > div:first-child img {
+    object-fit: cover !important;
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover > div:first-child::after {
+    display: none;
+  }
+
+  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover > div:nth-child(2) {
+    transform: translateX(0.1rem);
+  }
 }

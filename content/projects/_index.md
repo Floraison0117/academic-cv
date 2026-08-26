@@ -7,14 +7,12 @@ type: landing
 sections:
   - block: collection
     content:
-      title: Selected Projects
-      text: A compact list of selected projects.
       filters:
         folders:
           - projects
     design:
       view: article-grid
-      fill_image: false
+      fill_image: true
       columns: 2
       show_date: false
       show_read_time: false

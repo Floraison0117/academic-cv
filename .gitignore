@@ -27,6 +27,10 @@ hugo_stats.json
 
 # Dependencies
 node_modules/
+.pnpm-store/
+
+# Project-local tools
+.tools/
 
 # ============================================================================
 # Environment & Configuration
