@@ -421,9 +421,11 @@ body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:ha
   padding-inline: 2rem;
 }
 
-body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:has([role="article"]) > .grid,
-body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body > .flex.flex-col.items-center > div.container > .grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+@media (min-width: 768px) {
+  body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:has([role="article"]) > .grid,
+  body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body > .flex.flex-col.items-center > div.container > .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
 }
 
 body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] {
@@ -443,6 +445,28 @@ body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="articl
 body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > div:first-child,
 body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > span.mx-1 {
   display: none !important;
+}
+
+/* Use one card per row for Blogs and Projects on narrow screens. */
+@media (max-width: 767px) {
+  :is(
+    body:has(.page-body [role="article"] a[href^="/blog/"]),
+    body:has(.page-body [role="article"] a[href^="/projects/"])
+  ) .page-body .container:has([role="article"]) > .grid,
+  :is(
+    body:has(.page-body [role="article"] a[href^="/blog/"]),
+    body:has(.page-body [role="article"] a[href^="/projects/"])
+  ) .page-body > .flex.flex-col.items-center > div.container > .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  :is(
+    body:has(.page-body [role="article"] a[href^="/blog/"]),
+    body:has(.page-body [role="article"] a[href^="/projects/"])
+  ) .page-body [role="article"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
 }
 
 /* Keep the two Friends cards in equal-width columns on larger screens. */
