@@ -239,11 +239,29 @@ html:not(.dark) .navbar-nav .active {
   display: none !important;
 }
 
-/* Make the Stanford CS234 article smaller and wider to match the reference layout. */
-body:has(.article-cover img[src*="/blog/stanford-cs234/"]) .prose[data-pagefind-body] {
+/* Give every Blog article the same typography and content width as Stanford CS234. */
+body:has(.article-header img[src^="/blog/"]) .prose[data-pagefind-body],
+body:has(.article-header img[src*="/projects/zju-hpc-2026/"]) .prose[data-pagefind-body] {
   max-width: calc(65ch + 20em);
   font-size: 0.95rem !important;
   line-height: 1.7;
+}
+
+/* Keep consecutive exercise images in the topology article visually grouped. */
+body:has(.article-header img[src^="/blog/point-set-topology-exercises/"]) .prose[data-pagefind-body] p:has(> img) {
+  margin-block: 0.3rem !important;
+  line-height: 1 !important;
+}
+
+body:has(.article-header img[src^="/blog/point-set-topology-exercises/"]) .prose[data-pagefind-body] p:has(> img) > img {
+  display: block;
+  margin: 0 !important;
+}
+
+/* Project detail pages sit flush like blog pages (drop the page-body my-10 margins). */
+body:has(.article-header img[src*="/projects/zju-hpc-2026/"]) .page-body {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* Reuse the same full-width horizontal card layout for blogs and projects. */
@@ -286,49 +304,137 @@ body:has(.article-cover img[src*="/blog/stanford-cs234/"]) .prose[data-pagefind-
   justify-content: center;
 }
 
-/* Shared card reveal animation for Blogs and Projects. */
-@media (min-width: 768px) {
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
-    transition: grid-template-columns 650ms cubic-bezier(.22, 1, .36, 1), box-shadow 300ms ease, transform 300ms ease;
-  }
+/* Keep Blog and Project cards static on hover, while leaving text color changes intact. */
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
+  transition: none !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child {
-    position: relative;
-    overflow: hidden;
-  }
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover {
+  grid-template-columns: minmax(16rem, 32%) minmax(0, 1fr) !important;
+  transform: none !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img {
-    object-fit: cover !important;
-    transform: none !important;
-    filter: none !important;
-    transition: none;
-  }
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img,
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child > div.absolute {
+  transition: none !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after {
-    display: none;
-  }
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img {
+  object-fit: cover !important;
+  transform: none !important;
+  filter: none !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
-    position: relative;
-    z-index: 3;
-    transform: translateX(0);
-    transition: transform 650ms cubic-bezier(.22, 1, .36, 1);
-  }
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child > div.absolute {
+  opacity: 0 !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover {
-    grid-template-columns: minmax(24rem, 40%) minmax(0, 1fr);
-    transform: scale(1.01) translateY(-0.5rem);
-  }
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after,
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
+  transition: none !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover > div:first-child img {
-    object-fit: cover !important;
-  }
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after {
+  opacity: 0 !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover > div:first-child::after {
-    display: none;
-  }
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
+  transform: none !important;
+}
 
-  :is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover > div:nth-child(2) {
-    transform: translateX(0.1rem);
-  }
+/* Final utility-class overrides: the theme adds hover effects directly to the card markup. */
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"],
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] * {
+  transition: none !important;
+  animation: none !important;
+}
+
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover,
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover img,
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] img {
+  transform: none !important;
+}
+
+/* Friends cards: remove the metadata row so Read more follows the summary. */
+body:has(.page-body [role="article"] a[href^="/friends/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child {
+  padding-top: 0 !important;
+  border-top: 0 !important;
+}
+
+body:has(.page-body [role="article"] a[href^="/friends/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child,
+body:has(.page-body [role="article"] a[href^="/friends/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:last-child {
+  padding-top: 0 !important;
+  border-top: 0 !important;
+}
+
+body:has(.page-body [role="article"] a[href^="/friends/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child {
+  display: none !important;
+}
+
+/* Blogs and Friends should use the plain page background below the navbar. */
+:is(
+  body:has(.page-body [role="article"] a[href^="/blog/"]),
+  body:has(.page-body [role="article"] a[href^="/friends/"])
+) .page-body {
+  background: none !important;
+}
+
+/* Align the Projects page's content layer with the Blog page below the navbar. */
+body:has(#section-content-collection) .page-body {
+  margin-top: 2.5rem !important;
+}
+
+body:has(#section-content-collection) .page-body > #section-content-collection {
+  margin-top: 0 !important;
+}
+
+/* Remove the decorative gradient block at the top of the Projects section. */
+#section-content-collection > .home-section-bg {
+  display: none !important;
+}
+
+body:has(#section-content-collection) .page-body {
+  background: none !important;
+}
+
+/* Move the whole Projects grid upward so its first card sits at the same
+   distance from the navbar as the Blog page's first card, while keeping
+   the gap between cards unchanged. The section's default top padding is
+   removed; the shared page-body margin (2.5rem) + view padding (py-5)
+   then match the Blog list page exactly. */
+body:has(#section-content-collection) #section-content-collection {
+  padding-top: 0 !important;
+}
+
+/* Blog cards: compact two-column layout with date only in the metadata row. */
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body > .flex.flex-col.items-center > div.container,
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:has([role="article"]) {
+  width: 100% !important;
+  max-width: none !important;
+  padding-inline: 2rem;
+}
+
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:has([role="article"]) > .grid,
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body > .flex.flex-col.items-center > div.container > .grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] {
+  display: block !important;
+}
+
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:first-child {
+  min-height: 0 !important;
+  aspect-ratio: 16 / 9 !important;
+}
+
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) {
+  display: block !important;
+  padding: 1.25rem !important;
+}
+
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > div:first-child,
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > span.mx-1 {
+  display: none !important;
 }

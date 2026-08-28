@@ -1,0 +1,18 @@
+<script>
+  (() => {
+    const renderMath = () => {
+      if (typeof window.renderMathInElement !== 'function') return;
+      window.renderMathInElement(document.body, {
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError: false
+      });
+    };
+
+    window.addEventListener('load', () => setTimeout(renderMath, 0), {once: true});
+  })();
+</script>

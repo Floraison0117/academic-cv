@@ -14,7 +14,7 @@ sections:
       view: article-grid
       fill_image: true
       columns: 2
-      show_date: false
-      show_read_time: false
-      show_read_more: false
+      show_date: true
+      show_read_time: true
+      show_read_more: true
 ---
