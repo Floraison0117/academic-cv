@@ -43,6 +43,9 @@ working tree. Run the build again when a fresh production output is needed.
   `index.md` and optional `featured.png` or `featured.jpg`.
 - For a new blog post, create `content/blog/<slug>/index.md` and place its
   images in the same folder.
+- For a friend link, create `content/friends/<slug>/index.md` with the friend's
+  title, optional summary, and website URL under `links`. Place its cover image
+  in the same folder as `featured.jpg` or `featured.png`.
 - Keep page-specific images beside their content file, such as
   `content/blog/<slug>/featured.jpg` or
   `content/projects/<slug>/featured.png`.
