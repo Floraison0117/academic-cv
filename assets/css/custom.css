@@ -124,7 +124,7 @@ a:focus-visible,
 
 /* Replace the education icon with the Zhejiang University logo. */
 .resume-biography .md\:col-span-8 > .mb-16 > .grid > .group > .flex > .flex-shrink-0.w-12.h-12 {
-  background-image: url("https://www.eduopinions.com/wp-content/uploads/2020/06/Zhejiang-University-logo.png");
+  background-image: url("/media/icons/custom/zhejiang-university-logo.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 78%;
@@ -437,4 +437,16 @@ body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="articl
 body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > div:first-child,
 body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > span.mx-1 {
   display: none !important;
+}
+
+/* Keep the two Friends cards in equal-width columns on larger screens. */
+@media (min-width: 768px) {
+  body:has(.page-body [role="article"] a[href^="/friends/"]) .page-body .container:has([role="article"]) > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+body:has(.page-body [role="article"] a[href^="/friends/"]) .page-body [role="article"] {
+  width: 100%;
+  min-width: 0;
 }
