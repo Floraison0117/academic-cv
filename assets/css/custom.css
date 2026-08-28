@@ -448,7 +448,7 @@ body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="articl
 }
 
 /* Use one card per row for Blogs and Projects on narrow screens. */
-@media (max-width: 767px) {
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
   :is(
     body:has(.page-body [role="article"] a[href^="/blog/"]),
     body:has(.page-body [role="article"] a[href^="/projects/"])
