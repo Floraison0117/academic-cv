@@ -51,3 +51,27 @@ working tree. Run the build again when a fresh production output is needed.
   `content/projects/<slug>/featured.png`.
 - Do not remove or overwrite existing local changes unless the user explicitly
   asks for that.
+
+## Typst to Markdown Conversion
+
+- When converting a Typst note into a blog post, preserve the source prose,
+  section hierarchy, lists, formulas, and links. Remove only Typst-only layout
+  directives such as `#set`, `#show`, `#page`, `#outline`, `#pagebreak`, and
+  spacing commands such as `#v`.
+- Convert Typst headings (`=`, `==`, `===`, and so on) to the corresponding
+  Markdown heading levels. Convert `#link("url")[text]` to a Markdown link.
+- The site renders mathematics with KaTeX, so Typst math syntax must be
+  converted to LaTeX. Common conversions include `RR` to `\\mathbb{R}`,
+  `in` to `\\in`, `subset` to `\\subset`, named Greek letters to their
+  backslash commands, `sum_` to `\\sum`, and `cases(...)` to a LaTeX
+  `\\begin{cases}...\\end{cases}` block. Avoid nested constructs such as
+  `\\text{\\operatorname{OPT}}`; use `\\operatorname{OPT}` or
+  `\\mathrm{OPT}` instead.
+- Keep formulas embedded in prose as inline math using `$...$`. Convert
+  formulas occupying their own paragraph, including multi-line formulas, to
+  `$$...$$` so KaTeX displays them centered.
+- After conversion, search for remaining Typst commands and invalid nested
+  KaTeX commands, run `git diff --check`, and run `pnpm run build` to verify
+  that the page and its table of contents render successfully. Set `toc: true`
+  in the page front matter when the article should show the desktop sidebar
+  table of contents.
