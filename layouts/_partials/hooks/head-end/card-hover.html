@@ -1,18 +1,18 @@
 <style>
-  /* Keep Blog and Project cards completely static on hover. */
-  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"],
-  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] img {
+  /* Keep Blog, Jottings, and Project cards completely static on hover. */
+  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"],
+  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] img {
     transition: none !important;
     animation: none !important;
     transform: none !important;
   }
 
-  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover {
+  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover {
     transform: none !important;
     grid-template-columns: minmax(16rem, 32%) minmax(0, 1fr) !important;
   }
 
-  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover img {
+  :is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover img {
     transform: none !important;
   }
 </style>

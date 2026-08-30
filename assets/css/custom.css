@@ -241,6 +241,7 @@ html:not(.dark) .navbar-nav .active {
 
 /* Give Blog and Friend articles the same typography and content width. */
 body:has(.article-header img[src^="/blog/"]) .prose[data-pagefind-body],
+body:has(.article-header img[src^="/jottings/"]) .prose[data-pagefind-body],
 body:has(.article-header img[src^="/friends/"]) .prose[data-pagefind-body],
 body:has(.article-header img[src*="/projects/zju-hpc-2026/"]) .prose[data-pagefind-body] {
   max-width: calc(65ch + 20em);
@@ -266,27 +267,27 @@ body:has(.article-header img[src*="/projects/zju-hpc-2026/"]) .page-body {
 }
 
 /* Reuse the same full-width horizontal card layout for blogs and projects. */
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body > .flex.flex-col.items-center > div.container {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body > .flex.flex-col.items-center > div.container {
   width: 100%;
   max-width: none;
   padding-inline: 2rem;
 }
 
 /* The collection block may place the card container inside a section. */
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body .container:has([role="article"]) {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body .container:has([role="article"]) {
   width: 100% !important;
   max-width: none !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body .container:has([role="article"]) > .grid {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body .container:has([role="article"]) > .grid {
   grid-template-columns: minmax(0, 1fr) !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body > .flex.flex-col.items-center > div.container > .grid {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body > .flex.flex-col.items-center > div.container > .grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
   display: grid;
   grid-template-columns: minmax(16rem, 32%) minmax(0, 1fr);
   align-items: stretch;
@@ -294,66 +295,66 @@ body:has(.article-header img[src*="/projects/zju-hpc-2026/"]) .page-body {
   overflow: hidden;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child {
   min-height: 18rem;
   aspect-ratio: auto;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 /* Keep Blog and Project cards static on hover, while leaving text color changes intact. */
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] {
   transition: none !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"]:hover {
   grid-template-columns: minmax(16rem, 32%) minmax(0, 1fr) !important;
   transform: none !important;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img,
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child > div.absolute {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img,
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child > div.absolute {
   transition: none !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child img {
   object-fit: cover !important;
   transform: none !important;
   filter: none !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child > div.absolute {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child > div.absolute {
   opacity: 0 !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after,
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after,
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
   transition: none !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:first-child::after {
   opacity: 0 !important;
 }
 
-:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
+:is(body:has(.page-body [role="article"] a[href^="/blog/"]), body:has(.page-body [role="article"] a[href^="/jottings/"]), body:has(.page-body [role="article"] a[href^="/projects/"])) .page-body [role="article"] > div:nth-child(2) {
   transform: none !important;
 }
 
 /* Final utility-class overrides: the theme adds hover effects directly to the card markup. */
-:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"],
-:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] * {
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"],
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] * {
   transition: none !important;
   animation: none !important;
 }
 
-:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover,
-:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover img,
-:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] img {
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover,
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"]:hover img,
+:is(body:has(.page-body a[href^="/blog/"]), body:has(.page-body a[href^="/jottings/"]), body:has(.page-body a[href^="/projects/"])) .page-body [role="article"] img {
   transform: none !important;
 }
 
@@ -376,6 +377,8 @@ body:has(.page-body [role="article"] a[href^="/friends/"]) .page-body [role="art
 /* Blogs and Friends should use the plain page background below the navbar. */
 :is(
   body:has(.page-body [role="article"] a[href^="/blog/"]),
+  body:has(.page-body [role="article"] a[href^="/jottings/"]),
+  body:has(.page-body [role="article"] a[href^="/jottings/"]),
   body:has(.page-body [role="article"] a[href^="/friends/"])
 ) .page-body {
   background: none !important;
@@ -415,7 +418,9 @@ body:has(#section-content-collection) #section-content-collection {
 
 /* Blog cards: compact two-column layout with date only in the metadata row. */
 body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body > .flex.flex-col.items-center > div.container,
-body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:has([role="article"]) {
+body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body > .flex.flex-col.items-center > div.container,
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:has([role="article"]),
+body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body .container:has([role="article"]) {
   width: 100% !important;
   max-width: none !important;
   padding-inline: 2rem;
@@ -423,27 +428,34 @@ body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:ha
 
 @media (min-width: 768px) {
   body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body .container:has([role="article"]) > .grid,
-  body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body > .flex.flex-col.items-center > div.container > .grid {
+  body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body .container:has([role="article"]) > .grid,
+  body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body > .flex.flex-col.items-center > div.container > .grid,
+  body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body > .flex.flex-col.items-center > div.container > .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
 
-body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] {
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"],
+body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body [role="article"] {
   display: block !important;
 }
 
-body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:first-child {
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:first-child,
+body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body [role="article"] > div:first-child {
   min-height: 0 !important;
   aspect-ratio: 16 / 9 !important;
 }
 
-body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) {
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2),
+body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body [role="article"] > div:nth-child(2) {
   display: block !important;
   padding: 1.25rem !important;
 }
 
 body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > div:first-child,
-body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > span.mx-1 {
+body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > div:first-child,
+body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > span.mx-1,
+body:has(.page-body [role="article"] a[href^="/jottings/"]) .page-body [role="article"] > div:nth-child(2) > div:last-child > div:first-child > span.mx-1 {
   display: none !important;
 }
 
@@ -451,10 +463,14 @@ body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="articl
 @media (max-width: 1023px), (hover: none) and (pointer: coarse) {
   :is(
     body:has(.page-body [role="article"] a[href^="/blog/"]),
+    body:has(.page-body [role="article"] a[href^="/jottings/"]),
+    body:has(.page-body [role="article"] a[href^="/jottings/"]),
     body:has(.page-body [role="article"] a[href^="/projects/"])
   ) .page-body .container:has([role="article"]) > .grid,
   :is(
     body:has(.page-body [role="article"] a[href^="/blog/"]),
+    body:has(.page-body [role="article"] a[href^="/jottings/"]),
+    body:has(.page-body [role="article"] a[href^="/jottings/"]),
     body:has(.page-body [role="article"] a[href^="/projects/"])
   ) .page-body > .flex.flex-col.items-center > div.container > .grid {
     grid-template-columns: minmax(0, 1fr) !important;
@@ -462,6 +478,8 @@ body:has(.page-body [role="article"] a[href^="/blog/"]) .page-body [role="articl
 
   :is(
     body:has(.page-body [role="article"] a[href^="/blog/"]),
+    body:has(.page-body [role="article"] a[href^="/jottings/"]),
+    body:has(.page-body [role="article"] a[href^="/jottings/"]),
     body:has(.page-body [role="article"] a[href^="/projects/"])
   ) .page-body [role="article"] {
     width: 100% !important;

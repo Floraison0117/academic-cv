@@ -10,6 +10,9 @@ main:
   - name: Blogs
     url: blog/
     weight: 20
+  - name: Jottings
+    url: jottings/
+    weight: 25
   - name: Projects
     url: projects/
     weight: 30
