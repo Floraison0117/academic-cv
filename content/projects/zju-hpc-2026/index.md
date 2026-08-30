@@ -2,7 +2,7 @@
 title: "ZJU HPC 2026：实验个人解答"
 summary: "简单集群搭建，MoE 向量化计算，GDN Prefill 前向优化，昇腾算子开发与优化，AMSS-NCKU 数值相对论程序优化，INT8 张量核模拟 FP64 GEMM，Gemma4 端到端推理优化，鲲鹏 trsm 优化。"
 date: 2026-08-27T12:00:00+08:00
-lastmod: 2026-08-27T12:00:00+08:00
+lastmod: 2026-08-29T23:30:00+08:00
 math: true
 authors:
   - me
@@ -198,6 +198,30 @@ $$
 - rstd 标量化移出向量链；weight 拷贝移出关键路径；raw TBuf 加显式 SetFlag/WaitFlag 替代队列簿记；
 - tiling：blockDim=32、rowsPerChunk=8 均衡负载，逐行向量操作合并为 chunk 宽发射。
 
+## Lab 4：AMSS-NCKU 数值相对论程序优化
+
+**任务**：优化裁剪版 AMSS-NCKU 数值相对论程序（以引力波事件 GW250118 为背景的双黑洞并合模拟）的端到端运行时间。任务一在华为鲲鹏 920B（ARM）上优化 `TwoPunctureABE + ABE`（30 个 MPI rank、演化 40 步），任务二在单卡 A100 `1g.10gb` MIG 实例上优化 `TwoPunctureABE + ABEGPU`（演化 100 步）；两条路径共享 TwoPuncture 初值阶段。
+
+**原理**：程序以 BSSN 形式改写爱因斯坦场方程，四阶中心差分做空间离散、四阶 Runge-Kutta 做时间推进，并在黑洞附近用 Patch 结构、cell-centered 布局的 AMR 逐层加密网格。设第 \(i\) 个匹配时刻、第 \(j\) 个坐标分量的参考值为 \(r^{\mathrm{ref}}_{i,j}\)、输出为 \(r^{\mathrm{out}}_{i,j}\)，令 \(d_{i,j}=\max\left(|r^{\mathrm{ref}}_{i,j}|,\ |r^{\mathrm{out}}_{i,j}|\right)\)，忽略过小项后剩余比较项集合为 \(\Omega\)，则
+
+$$
+\mathrm{RMS}=\sqrt{\frac{1}{|\Omega|}\sum_{(i,j)\in\Omega}\left(\frac{r^{\mathrm{out}}_{i,j}-r^{\mathrm{ref}}_{i,j}}{d_{i,j}}\right)^2}\le 0.1\%,
+$$
+
+同时 `bssn_constraint.dat` 中 Grid Level 0 的约束量需满足
+
+$$
+\max_{t,\ c\in\{H,P_x,P_y,P_z\}}\left|C^{(0)}_c(t)\right|\le 2.0.
+$$
+
+**解法**：
+
+- TwoPuncture 共享阶段：profiling 定位热点在 `relax` 的矩阵装配、批量三对角求解与 `chebft_Zeros` 的重复余弦变换；预打包 JFD 与列索引消除热循环间接访存、缓存 Chebyshev 余弦表、对相互独立的线做红黑 OpenMP 并行，基线约 290 s 一路降到约 27.8 s（Intel 16 线程，数据来自不同平台与迭代阶段，不能拼成单一加速比）；
+- GPU 初值路径修正：`J_times_dv` 的 GPU 分支直接 return，跳过了 CPU 路径的 `Derivatives_AB3`，谱导数全为零，BiCGStab 残余从 1e-1 爆到 1e+107；补上一行调用后 34.4 s 与 CPU 相当，正式构建仍走验证过的 CPU OpenMP 路径，GPU 资源留给 BSSN 演化；
+- 任务一（鲲鹏 30 rank）：逐 rank profiling 发现“通信慢”实为 `global_interp` 让少数 rank 成为 straggler；`DIST_INTERP` 把插值点跨 rank 分片汇总、`LOADBAL` 按 patch 点数重新分配，叠加 packed collective、余弦表与编译 flag（`-fno-tree-loop-distribute-patterns`、`-ftree-loop-im`），端到端 909.42 s 降到 408.915 s；
+- 任务一 `compute_rhs_bssn_` 重写：whole-array 语句每次物化约 80 个三维中间数组（约 6.6 MB）反复进出 L1/L2；把 21 个 `fderivs` 内联为 k 切片滚动窗口的平面子程序，42 个导数数组不再全量落盘，工作集压进 L2；gfortran 对显式循环与 whole-array 生成相同求和序，40 步全量 bit-exact，约 9.35 s/步降到 6.98 s/步，端到端 300.943 s（120 分满分）；
+- 任务二（A100 MIG）：stencil helper 移入 header 加 `__forceinline__`（约 1266→1052 s）、`fh` 反射系数保留 early return 的 branchless 化（→1007 s）；RHS 拆 interior/boundary 路径压寄存器压力、插值变量批处理、Sommerfeld 紧凑发射、prolong3 tap reuse 与 fused-z 插值（536.76 s）；interior 再改 staged path、六阶插值改固定节点 Lagrange 直接评价，最终 OJ 351.96 s、102.03 分，100 个轨迹点 RMS=0、Level-0 约束全部通过；
+
 ## Lab 4.5：INT8 张量核模拟 FP64 GEMM
 
 **任务**：在 H800 MIG 上用 INT8 Tensor Core 模拟 FP64 矩阵乘（4096³ 与 8192³），在 L2 相对误差达标的前提下优化端到端吞吐。
@@ -293,7 +317,3 @@ $$
 - decode Triton 双路径：M≤8 走 GEMV（合并加载加 FP32 归约），M>8 走 `tl.dot` Tensor Core；
 - 固化 autotune 胜者配置，冷启动编译从 104 个 kernel 降到 7 个（749.8s → 94.5s）；
 - 权重整体驻留 GPU 消除每步 H2D；qweight 转置成 K 连续布局后合并加载加 coalesced MMA，占用率 12.5%→31%。
-
-## 结语
-
-*Lab 4（AMSS-NCKU 数值相对论程序优化）暂未整理，待补。*
