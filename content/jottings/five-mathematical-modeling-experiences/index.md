@@ -16,9 +16,6 @@ cover:
     type: "gradient"
     opacity: 0.4
     gradient: "bottom"
-  fade:
-    enabled: true
-    height: "80px"
 authors:
   - me
 tags:

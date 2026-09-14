@@ -389,6 +389,11 @@ body:has(.article-header img[src^="/friends/"]) .page-body {
   background: none !important;
 }
 
+/* Remove the decorative gradient block from the peer-tutoring jottings page. */
+body:has(a[href="/jottings/peer-tutoring-this-year/"]) .page-body {
+  background: none !important;
+}
+
 /* Align the Projects page's content layer with the Blog page below the navbar. */
 body:has(#section-content-collection) .page-body {
   margin-top: 2.5rem !important;
