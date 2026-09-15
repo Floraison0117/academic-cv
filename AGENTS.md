@@ -19,7 +19,10 @@ Markdown content files rather than theme internals.
 - `content/blog/`, `content/projects/`, and `content/friends/`: the currently
   published section content and their list pages.
 - `assets/media/authors/me.png`: profile image.
+- `assets/media/icon.png`: site favicon and Apple Touch Icon source.
 - `assets/media/icons/custom/cc98.svg`: custom profile icon.
+- `static/pdfs/`: PDF files embedded by blog posts and served as downloadable
+  static assets.
 
 ## Common Commands
 
@@ -49,6 +52,12 @@ working tree. Run the build again when a fresh production output is needed.
 - Keep page-specific images beside their content file, such as
   `content/blog/<slug>/featured.jpg` or
   `content/projects/<slug>/featured.png`.
+- For a blog whose primary content is a PDF, place the PDF under
+  `static/pdfs/` and embed it in `content/blog/<slug>/index.md` with a
+  responsive `<iframe>`. Include a normal download link as a browser fallback.
+- Use `assets/media/icon.png` for the site favicon. Keep it square and preserve
+  transparency when the source image supports it; the Hugo Blox theme creates
+  the small favicon and Apple Touch Icon variants during the build.
 - Do not remove or overwrite existing local changes unless the user explicitly
   asks for that.
 
