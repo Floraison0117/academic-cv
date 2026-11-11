@@ -33,7 +33,5 @@ interests:
   - "French"
   - "HPC"
 education:
-  - degree: "24-25 National Scholarship, First-Class Scholarship"
-    institution: "Control Science and Engineering, Zhejiang University"
-  - degree: "25-26 National Scholarship, First-Class Scholarship"
+  - degree: "25-26 National Scholarship, First-Class Scholarship\u202824-25 National Scholarship, First-Class Scholarship"
     institution: "Control Science and Engineering, Zhejiang University"
